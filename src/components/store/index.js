@@ -10,6 +10,14 @@ function counterReducer(state = { counter: 1 }, action) {
 			counter: state.counter + 1,
 		};
 	}
+
+	if (action.type === "increase") {
+		return {
+			...state,
+			counter: state.counter + action.amount,
+		};
+	}
+
 	if (action.type === "decrement") {
 		return {
 			...state,
