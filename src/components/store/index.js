@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-function counterReducer(state = { counter: 1 }, action) {
+const initialState = { counter: 0, showCounter: true };
+function counterReducer(state = initialState, action) {
 	// Check to see if the reducer cares about this action
 	if (action.type === "increment") {
 		// If so, make a copy of `state`
@@ -8,6 +9,7 @@ function counterReducer(state = { counter: 1 }, action) {
 			...state,
 			// and update the copy with the new value
 			counter: state.counter + 1,
+			showCounter: state.showCounter,
 		};
 	}
 
@@ -15,6 +17,7 @@ function counterReducer(state = { counter: 1 }, action) {
 		return {
 			...state,
 			counter: state.counter + action.amount,
+			showCounter: state.showCounter,
 		};
 	}
 
@@ -22,6 +25,14 @@ function counterReducer(state = { counter: 1 }, action) {
 		return {
 			...state,
 			counter: state.counter - 1,
+			showCounter: state.showCounter,
+		};
+	}
+	if (action.type === "toggle") {
+		return {
+			...state,
+			counter: state.counter,
+			showCounter: !state.showCounter,
 		};
 	}
 	// otherwise return the existing state unchanged
